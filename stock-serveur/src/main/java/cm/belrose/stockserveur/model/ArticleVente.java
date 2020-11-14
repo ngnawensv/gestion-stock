@@ -18,11 +18,6 @@ public class ArticleVente  implements Serializable {
     private Article article;
     @ManyToOne
     private Vente vente;
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dateVente;
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dateModification;
-
     public Long getId() {
         return id;
     }
@@ -53,21 +48,5 @@ public class ArticleVente  implements Serializable {
 
     public void setVente(Vente vente) {
         this.vente = vente;
-    }
-
-    public Date getDateVente() {
-        return dateVente;
-    }
-
-    public void setDateVente(Date dateVente) {
-        this.dateVente = dateVente;
-    }
-
-    public Date getDateModification() {
-        return dateModification;
-    }
-
-    public void setDateModification(Date dateModification) {
-        this.dateModification = dateModification;
     }
 }

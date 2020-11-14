@@ -16,10 +16,6 @@ public class Article implements Serializable {
     private String nom;
     private double prixAchat;
     private double prixVente;
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dateCreation;
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dateModification;
     @OneToMany(mappedBy = "article")
     private Collection<CommandeClient> commandeClients;
     @OneToMany(mappedBy = "article")
@@ -63,22 +59,6 @@ public class Article implements Serializable {
 
     public void setPrixVente(double prixVente) {
         this.prixVente = prixVente;
-    }
-
-    public Date getDateCreation() {
-        return dateCreation;
-    }
-
-    public void setDateCreation(Date dateCreation) {
-        this.dateCreation = dateCreation;
-    }
-
-    public Date getDateModification() {
-        return dateModification;
-    }
-
-    public void setDateModification(Date dateModification) {
-        this.dateModification = dateModification;
     }
 
     public Collection<CommandeClient> getCommandeClients() {

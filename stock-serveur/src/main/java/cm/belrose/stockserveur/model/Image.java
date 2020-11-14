@@ -15,10 +15,6 @@ public class Image implements Serializable {
     private Long id;
     private String nom;
     private String nature;
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dateCreation;
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dateModification;
     @ManyToOne
     private Article article;
 
@@ -46,22 +42,6 @@ public class Image implements Serializable {
         this.nature = nature;
     }
 
-    public Date getDateCreation() {
-        return dateCreation;
-    }
-
-    public void setDateCreation(Date dateCreation) {
-        this.dateCreation = dateCreation;
-    }
-
-    public Date getDateModification() {
-        return dateModification;
-    }
-
-    public void setDateModification(Date dateModification) {
-        this.dateModification = dateModification;
-    }
-
     public Article getArticle() {
         return article;
     }
@@ -76,8 +56,6 @@ public class Image implements Serializable {
                 "id=" + id +
                 ", nom='" + nom + '\'' +
                 ", nature='" + nature + '\'' +
-                ", dateCreation=" + dateCreation +
-                ", dateModification=" + dateModification +
                 ", article=" + article +
                 '}';
     }

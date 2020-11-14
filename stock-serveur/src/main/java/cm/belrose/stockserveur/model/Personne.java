@@ -29,10 +29,6 @@ public class Personne implements Serializable {
     private Collection<CommandeClient> commandeClients;
     @OneToMany(mappedBy = "personne")
     private Collection<LivraisonFournisseur> livraisonFournisseurs;
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dateCreation;
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dateModification;
 
     public Long getId() {
         return id;
@@ -112,22 +108,6 @@ public class Personne implements Serializable {
 
     public void setStatut(String statut) {
         this.statut = statut;
-    }
-
-    public Date getDateCreation() {
-        return dateCreation;
-    }
-
-    public void setDateCreation(Date dateCreation) {
-        this.dateCreation = dateCreation;
-    }
-
-    public Date getDateModification() {
-        return dateModification;
-    }
-
-    public void setDateModification(Date dateModification) {
-        this.dateModification = dateModification;
     }
 
     public String getResidence() {

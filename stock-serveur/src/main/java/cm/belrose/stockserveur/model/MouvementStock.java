@@ -16,10 +16,6 @@ public class MouvementStock implements Serializable {
     private String type;
     @ManyToOne
     private Article article;
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dateMouvement;
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dateModification;
 
     public Long getId() {
         return id;
@@ -43,21 +39,5 @@ public class MouvementStock implements Serializable {
 
     public void setArticle(Article article) {
         this.article = article;
-    }
-
-    public Date getDateMouvement() {
-        return dateMouvement;
-    }
-
-    public void setDateMouvement(Date dateMouvement) {
-        this.dateMouvement = dateMouvement;
-    }
-
-    public Date getDateModification() {
-        return dateModification;
-    }
-
-    public void setDateModification(Date dateModification) {
-        this.dateModification = dateModification;
     }
 }

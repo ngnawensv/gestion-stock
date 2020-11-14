@@ -17,14 +17,6 @@ public class Vente implements Serializable {
     private String code;
     @OneToMany(mappedBy = "vente")
     private Collection<ArticleVente> articleVentes;
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dateCreation;
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dateModification;
-
-    public Long getId() {
-        return id;
-    }
 
     public void setId(Long id) {
         this.id = id;
@@ -44,21 +36,5 @@ public class Vente implements Serializable {
 
     public void setArticleVentes(Collection<ArticleVente> articleVentes) {
         this.articleVentes = articleVentes;
-    }
-
-    public Date getDateCreation() {
-        return dateCreation;
-    }
-
-    public void setDateCreation(Date dateCreation) {
-        this.dateCreation = dateCreation;
-    }
-
-    public Date getDateModification() {
-        return dateModification;
-    }
-
-    public void setDateModification(Date dateModification) {
-        this.dateModification = dateModification;
     }
 }

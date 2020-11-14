@@ -18,11 +18,6 @@ public class LivraisonFournisseur implements Serializable {
     private Article article;
     @ManyToOne
     private Personne personne;
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dateLivraison;
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dateModification;
-
     public Long getId() {
         return id;
     }
@@ -53,21 +48,5 @@ public class LivraisonFournisseur implements Serializable {
 
     public void setPersonne(Personne personne) {
         this.personne = personne;
-    }
-
-    public Date getDateLivraison() {
-        return dateLivraison;
-    }
-
-    public void setDateLivraison(Date dateLivraison) {
-        this.dateLivraison = dateLivraison;
-    }
-
-    public Date getDateModification() {
-        return dateModification;
-    }
-
-    public void setDateModification(Date dateModification) {
-        this.dateModification = dateModification;
     }
 }

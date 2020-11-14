@@ -18,10 +18,6 @@ public class CommandeClient  implements Serializable {
     private Article article;
     @ManyToOne
     private Personne personne;
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dateCommande;
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dateModification;
 
     public Long getId() {
         return id;
@@ -53,21 +49,5 @@ public class CommandeClient  implements Serializable {
 
     public void setPersonne(Personne personne) {
         this.personne = personne;
-    }
-
-    public Date getDateCommande() {
-        return dateCommande;
-    }
-
-    public void setDateCommande(Date dateCommande) {
-        this.dateCommande = dateCommande;
-    }
-
-    public Date getDateModification() {
-        return dateModification;
-    }
-
-    public void setDateModification(Date dateModification) {
-        this.dateModification = dateModification;
     }
 }
