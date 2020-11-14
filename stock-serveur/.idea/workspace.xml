@@ -241,7 +241,6 @@
       <change afterPath="$PROJECT_DIR$/target/classes/cm/belrose/stockserveur/service/impl/UserServiceImpl.class" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/target/test-classes/cm/belrose/stockserveur/GestionstockmvcApplicationTests.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../stock-client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../stock-client/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -495,15 +494,6 @@
               <item name="stockserveur" type="462c0819:PsiDirectoryNode" />
               <item name="model" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="stock-serveur" type="b2602c69:ProjectViewProjectNode" />
-              <item name="stock-serveur" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="stockserveur" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -583,16 +573,15 @@
       <workItem from="1605352732606" duration="773000" />
       <workItem from="1605355225799" duration="4163000" />
       <workItem from="1605366594269" duration="599000" />
-      <workItem from="1605384567242" duration="2699000" />
+      <workItem from="1605384567242" duration="3363000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="105132000" />
+    <option name="totallyTimeSpent" value="105796000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2730711" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
