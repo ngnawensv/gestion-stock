@@ -9,7 +9,7 @@ import java.util.Date;
  */
 
 @Entity
-public class CommandeClient  implements Serializable {
+public class CommandeClient extends Auditable<String>  implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

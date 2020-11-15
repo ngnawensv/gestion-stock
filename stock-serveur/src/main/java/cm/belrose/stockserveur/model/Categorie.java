@@ -1,7 +1,4 @@
 package cm.belrose.stockserveur.model;
-
-import org.springframework.data.annotation.CreatedDate;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -13,7 +10,7 @@ import java.util.Date;
  */
 @Entity
 @Table(uniqueConstraints = {@UniqueConstraint(columnNames = "nom")})
-public class Categorie implements Serializable {
+public class Categorie extends Auditable<String> implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

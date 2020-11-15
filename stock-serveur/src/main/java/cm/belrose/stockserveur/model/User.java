@@ -14,7 +14,7 @@ import java.util.Set;
 
 @Entity
 @Table(	name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = "username"), @UniqueConstraint(columnNames = "email")})
-public class User implements Serializable {
+public class User extends Auditable<String> implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

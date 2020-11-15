@@ -46,6 +46,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     JwtUtils jwtUtils;
 
+    private static String currentUser=null;
     @Override
     public void save(User user) {
         userRepository.save(user);
@@ -88,6 +89,8 @@ public class UserServiceImpl implements UserService {
         List<String> roles = userDetails.getAuthorities().stream()
                 .map(item -> item.getAuthority())
                 .collect(Collectors.toList());
+        currentUser=userDetails.getUsername();
+        System.out.println("userDetails.getUsername()+++> : " + userDetails.getUsername());
         return new JwtResponse(jwt, userDetails.getId(), userDetails.getUsername(), userDetails.getEmail(), roles);
     }
 
@@ -98,7 +101,7 @@ public class UserServiceImpl implements UserService {
         Set<String> strRoles = signUpRequest.getRole();
         Set<Role> roles = new HashSet<>();
         if (strRoles == null) {
-            Role userRole = roleRepository.findByName(ERole.ROLE_USER)
+            Role userRole = roleRepository.findByName(ERole.ROLE_MODERATOR)
                     .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
             roles.add(userRole);
         } else {
@@ -124,5 +127,13 @@ public class UserServiceImpl implements UserService {
         user.setRoles(roles);
         userRepository.save(user);
         return new MessageResponse("User registered successfully!");
+    }
+
+    public static String getCurrentUser() {
+        return currentUser;
+    }
+
+    public static void setCurrentUser(String currentUser) {
+        UserServiceImpl.currentUser = currentUser;
     }
 }

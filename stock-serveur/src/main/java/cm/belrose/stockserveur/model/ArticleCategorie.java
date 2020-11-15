@@ -7,7 +7,7 @@ import java.io.Serializable;
  * @author Ngnawen Samuel
  */
 @Entity
-public class ArticleCategorie implements Serializable {
+public class ArticleCategorie extends Auditable<String> implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

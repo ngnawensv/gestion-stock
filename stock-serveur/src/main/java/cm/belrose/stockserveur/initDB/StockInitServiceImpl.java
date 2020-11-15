@@ -64,7 +64,6 @@ public class StockInitServiceImpl implements StockInitService {
         Stream.of("CodeVente1", "CodeVente2","CodeVente3").forEach(codeVente->{
             Vente vente=new Vente();
             vente.setCode(codeVente);
-            vente.setDateCreation(new Date());
             venteRepository.save(vente);
         });
 
@@ -77,7 +76,6 @@ public class StockInitServiceImpl implements StockInitService {
         Stream.of("Article 1","article 2","Article 3","Article 4","Article 5").forEach(nomArticle->{
             Article article=new Article();
             article.setNom(nomArticle);
-            article.setDateCreation(new Date());
             article.setPrixAchat(prix[new Random().nextInt(prix.length)]);
             article.setPrixVente(prix[new Random().nextInt(prix.length)]);
             articleRepository.save(article);
@@ -92,7 +90,6 @@ public class StockInitServiceImpl implements StockInitService {
                 ArticleVente articleVente=new ArticleVente();
                 articleVente.setArticle(article);
                 articleVente.setVente(vente);
-                articleVente.setDateVente(new Date());
                 articleVente.setQuantite(10+ (int)Math.random()*7);
                 articleVenteRepository.save(articleVente);
             });
@@ -140,7 +137,6 @@ public class StockInitServiceImpl implements StockInitService {
         Stream.of("Personne 1","Personne 2","Personne 3","Personne 4","Personne 5").forEach(nomPersonne->{
             Personne personne=new Personne();
             personne.setNom("Nom"+nomPersonne);
-            personne.setDateCreation(new Date());
             personne.setPrenom("Prenom"+nomPersonne);
             personneRepository.save(personne);
         });
@@ -153,7 +149,6 @@ public class StockInitServiceImpl implements StockInitService {
                 CommandeClient commandeClient=new CommandeClient();
                 commandeClient.setQuantite(10+(int)Math.random()*7);
                 commandeClient.setArticle(article);
-                commandeClient.setDateCommande(new Date());
                 commandeClient.setPersonne(personne);
                 commandeClientRepository.save(commandeClient);
             });
@@ -168,7 +163,6 @@ public class StockInitServiceImpl implements StockInitService {
                 LivraisonFournisseur livraisonFournisseur=new LivraisonFournisseur();
                 livraisonFournisseur.setQuantite(10+(int)Math.random()*7);
                 livraisonFournisseur.setArticle(article);
-                livraisonFournisseur.setDateLivraison(new Date());
                 livraisonFournisseur.setPersonne(personne);
                 livraisonFournisseurRepository.save(livraisonFournisseur);
             });
@@ -184,8 +178,7 @@ public class StockInitServiceImpl implements StockInitService {
                 Image image=new Image();
                 image.setNom("Nom"+nomImages.get(new Random().nextInt(nomImages.size())));
                 image.setNature("Nature"+nomImages.get(new Random().nextInt(nomImages.size())).replace(".jpg",""));
-                image.setDateCreation(new Date());
-                image.setArticle(article);
+               image.setArticle(article);
                 imageRepository.save(image);
         });
 
