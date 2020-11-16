@@ -5,9 +5,12 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
+ *
+ * Le 09/11/2020
+ *
  *@author  Ngnawen Samuel
+ *
  */
-
 @Entity
 public class CommandeClient extends Auditable<String>  implements Serializable {
     @Id

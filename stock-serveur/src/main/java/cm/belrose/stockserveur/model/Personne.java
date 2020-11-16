@@ -6,9 +6,12 @@ import java.util.Collection;
 import java.util.Date;
 
 /**
+ *
+ * Le 09/11/2020
+ *
  *@author  Ngnawen Samuel
+ *
  */
-
 @Entity
 public class Personne extends Auditable<String> implements Serializable {
     @Id

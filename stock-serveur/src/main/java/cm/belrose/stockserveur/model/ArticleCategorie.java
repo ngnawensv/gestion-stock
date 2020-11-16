@@ -4,7 +4,10 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 /**
+ * Le 09/11/2020
+ *
  * @author Ngnawen Samuel
+ *
  */
 @Entity
 public class ArticleCategorie extends Auditable<String> implements Serializable {

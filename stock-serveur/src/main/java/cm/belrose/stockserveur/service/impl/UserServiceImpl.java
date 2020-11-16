@@ -99,6 +99,9 @@ public class UserServiceImpl implements UserService {
         // Create new user's account
         User user = new User(signUpRequest.getUsername(), signUpRequest.getEmail(), encoder.encode(signUpRequest.getPassword()));
         Set<String> strRoles = signUpRequest.getRole();
+        System.out.println("Liste des roles");
+        strRoles.forEach(System.out::println);
+
         Set<Role> roles = new HashSet<>();
         if (strRoles == null) {
             Role userRole = roleRepository.findByName(ERole.ROLE_MODERATOR)

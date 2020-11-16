@@ -34,7 +34,7 @@ public class AuditorAwareImpl implements AuditorAware<String> {
             return null;
         }*/
         String username=UserServiceImpl.getCurrentUser();
-        System.out.println("User in spring context====>"+username);
-        return Optional.of(username);
+        //System.out.println("User in spring context====>"+username);
+        return Optional.of("Admin");
     }
 }

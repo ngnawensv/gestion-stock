@@ -30,7 +30,7 @@ import java.util.Optional;
 @RequestMapping("/api")
 public class CategorieController {
 
-    public static final Logger logger= LoggerFactory.getLogger(CategorieController.class);
+    private static final Logger logger= LoggerFactory.getLogger(CategorieController.class);
 
     @Autowired
     CategorieService categorieService;

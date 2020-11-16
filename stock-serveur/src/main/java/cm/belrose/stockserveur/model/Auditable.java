@@ -16,6 +16,7 @@ import javax.persistence.MappedSuperclass;
 import java.util.Date;
 
 /**
+ * Le 15/11/2020
  * The overall idea behind this class (Auditable) is to provide the required attributes
  * and columns for the database (table) auditing.
  * @MappedSuperclass :- Designates a class whose mapping information is applied to the entities that inherit from it.
