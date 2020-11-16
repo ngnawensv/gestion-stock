@@ -1,5 +1,5 @@
 # gestion-stock
-==
+=
 Implemented features are:
 -
 1. **Data auditing feature to the application**
