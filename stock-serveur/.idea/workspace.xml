@@ -252,6 +252,8 @@
       <change afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/target/test-classes/cm/belrose/stockserveur/GestionstockmvcApplicationTests.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../stock-client/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../stock-client/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -636,15 +638,16 @@
       <workItem from="1605352732606" duration="773000" />
       <workItem from="1605355225799" duration="4163000" />
       <workItem from="1605366594269" duration="599000" />
-      <workItem from="1605384567242" duration="78100000" />
+      <workItem from="1605384567242" duration="78110000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="180533000" />
+    <option name="totallyTimeSpent" value="180543000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="754" extended-state="7" />
+    <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2753404" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
