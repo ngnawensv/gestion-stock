@@ -6,9 +6,9 @@
         <a href="/home" class="nav-link" routerLink="home">{{ 'app.component.home' | translate }} </a>
       </li>
       <li class="nav-item" *ngIf="showAdminBoard">
-        <a href="/article" class="nav-link" routerLink="article">{{'main.page.app.AdminBoard' | translate}}</a>
+        <a href="/admin" class="nav-link" routerLink="admin">{{'main.page.app.AdminBoard' | translate}}</a>
       </li>
-      <li class="nav-item dropdown btn-info" *ngIf="showAdminBoard">
+      <li class="nav-item dropdown btn-info" *ngIf="showAdminBoard || showModeratorBoard">
         <a  class="nav-link dropdown-toggle btn-info" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           {{'app.component.parametres' | translate}}
         </a>
@@ -53,7 +53,7 @@
         </a>
         <div class="dropdown-menu clickable" aria-labelledby="navbarDropdownMenuLink">
           <a class="dropdown-item clickable" href="/profile" routerLink="profile">Dashboard</a>
-          <a class="dropdown-item clickable" href="/profile" routerLink="profile">Edit Profile</a>
+          <a href="/register" class="dropdown-item clickable" routerLink="register">Users</a>
           <a class="dropdown-item clickable"(click)="logout()">{{'main.page.app.LogOut' | translate}}</a>
         </div>
       </li>

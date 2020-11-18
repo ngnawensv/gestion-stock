@@ -3,7 +3,6 @@ package cm.belrose.stockserveur.model;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.Date;
 
 /**
  *
@@ -13,7 +12,7 @@ import java.util.Date;
  *
  */
 @Entity
-public class Vente extends Auditable<String> implements Serializable {
+public class Vente implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

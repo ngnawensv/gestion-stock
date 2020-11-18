@@ -2,7 +2,6 @@ package cm.belrose.stockserveur.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  *
@@ -12,7 +11,7 @@ import java.util.Date;
  *
  */
 @Entity
-public class MouvementStock extends Auditable<String> implements Serializable {
+public class MouvementStock implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

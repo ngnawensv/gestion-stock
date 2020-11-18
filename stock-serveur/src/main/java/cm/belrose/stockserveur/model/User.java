@@ -1,5 +1,8 @@
 package cm.belrose.stockserveur.model;
 
+import cm.belrose.stockserveur.config.audit.Auditable;
+import org.hibernate.envers.Audited;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -16,8 +19,9 @@ import java.util.Set;
  *
  */
 @Entity
+@Audited
 @Table(	name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = "username"), @UniqueConstraint(columnNames = "email")})
-public class User implements Serializable {
+public class User extends Auditable<String> implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -35,6 +39,10 @@ public class User implements Serializable {
     @Size(max = 120)
     private String password;
 
+    /**
+     * FetchType.LAZY : indique que la relation doit être chargée à la demande ;
+     * FetchType.EAGER : indique que la relation (User-role) doit être chargée en même temps que l'entité qui la User
+     */
     @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinTable(	name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),

@@ -1,17 +1,20 @@
 package cm.belrose.stockserveur.model;
+import cm.belrose.stockserveur.config.audit.Auditable;
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.NotAudited;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.Date;
+
 /**
  *
- * Le 09/11/2020
- *
  *@author  Ngnawen Samuel
+ * @since  09/11/2020 20:30:00
  *
  */
+@Audited
 @Entity
 @Table(uniqueConstraints = {@UniqueConstraint(columnNames = "nom")})
 public class Categorie extends Auditable<String> implements Serializable {
@@ -26,6 +29,7 @@ public class Categorie extends Auditable<String> implements Serializable {
     private String nom;
 
     @OneToMany(mappedBy = "categorie")
+    @NotAudited
     private Collection<ArticleCategorie> articleCategories;
 
     public Categorie() {

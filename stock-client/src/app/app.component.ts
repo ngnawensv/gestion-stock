@@ -27,7 +27,7 @@ export class AppComponent implements OnInit {
     if (this.isLoggedIn) {
       const user = this.tokenStorageService.getUser();
       this.roles = user.roles;
-
+      //includes(): Methode qui determine si un tableau contient et retourne true sinon elle retourne false
       this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
       this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
       this.showUserBoard = this.roles.includes('ROLE_User');

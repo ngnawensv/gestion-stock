@@ -1,5 +1,8 @@
 package cm.belrose.stockserveur.model;
 
+import cm.belrose.stockserveur.config.audit.Auditable;
+import org.hibernate.envers.Audited;
+
 import javax.persistence.*;
 
 /**
@@ -10,8 +13,9 @@ import javax.persistence.*;
  *
  */
 @Entity
+@Audited
 @Table(name = "roles")
-public class Role {
+public class Role extends Auditable<String> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

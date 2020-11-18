@@ -13,7 +13,7 @@ import java.util.Date;
  *
  */
 @Entity
-public class Personne extends Auditable<String> implements Serializable {
+public class Personne implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

@@ -36,7 +36,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
-			<optional>true</optional>
+<!--			<optional>true</optional>-->
 		</dependency>
 		<dependency>
 			<groupId>mysql</groupId>
@@ -68,15 +68,15 @@
 			<version>1.18.10</version>
 			<scope>provided</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-devtools</artifactId>
-		</dependency>
 		<!--<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-envers</artifactId>
-			<version>5.3.1.Final</version>
-		</dependency>-->
+		<groupId>org.hibernate</groupId>
+		<artifactId>hibernate-envers</artifactId>
+	</dependency>-->
+<!--		For auditing database by spring data jpa envers-->
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-envers</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>

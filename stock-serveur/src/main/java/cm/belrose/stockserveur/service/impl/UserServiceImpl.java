@@ -81,16 +81,19 @@ public class UserServiceImpl implements UserService {
     public JwtResponse authenticateUser(LoginRequest loginRequest) {
 
         Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+                new UsernamePasswordAuthenticationToken(
+                        loginRequest.getUsername(),
+                        loginRequest.getPassword()
+                )
+        );
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtUtils.generateJwtToken(authentication);
-        System.out.println("jwt : " + jwt);
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
         List<String> roles = userDetails.getAuthorities().stream()
                 .map(item -> item.getAuthority())
                 .collect(Collectors.toList());
         currentUser=userDetails.getUsername();
-        System.out.println("userDetails.getUsername()+++> : " + userDetails.getUsername());
+        //System.out.println("userDetails.getUsername()+++> : " + userDetails.getUsername());
         return new JwtResponse(jwt, userDetails.getId(), userDetails.getUsername(), userDetails.getEmail(), roles);
     }
 
@@ -99,9 +102,6 @@ public class UserServiceImpl implements UserService {
         // Create new user's account
         User user = new User(signUpRequest.getUsername(), signUpRequest.getEmail(), encoder.encode(signUpRequest.getPassword()));
         Set<String> strRoles = signUpRequest.getRole();
-        System.out.println("Liste des roles");
-        strRoles.forEach(System.out::println);
-
         Set<Role> roles = new HashSet<>();
         if (strRoles == null) {
             Role userRole = roleRepository.findByName(ERole.ROLE_MODERATOR)

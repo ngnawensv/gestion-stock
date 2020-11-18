@@ -2,7 +2,6 @@ package cm.belrose.stockserveur.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * Le 09/11/2020
@@ -11,7 +10,7 @@ import java.util.Date;
  *
  */
 @Entity
-public class ArticleVente extends Auditable<String>  implements Serializable {
+public class ArticleVente implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
