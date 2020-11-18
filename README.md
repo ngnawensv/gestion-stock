@@ -1,3 +1,5 @@
 # gestion-stock
 
-2. **Data base initialize (Super user is create) when Application start**  
+Data base initialize when Application start
+-
+In this feature we have implemented the database initialization at the application startup. Super user is create **admin** wirh here role
