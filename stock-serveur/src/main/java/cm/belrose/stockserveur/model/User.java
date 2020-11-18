@@ -1,6 +1,7 @@
 package cm.belrose.stockserveur.model;
 
 import cm.belrose.stockserveur.config.audit.Auditable;
+import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
 
 import javax.persistence.*;

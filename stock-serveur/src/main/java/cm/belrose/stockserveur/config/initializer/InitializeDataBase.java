@@ -47,7 +47,6 @@ public class InitializeDataBase implements CommandLineRunner {
                         new Role(ERole.ROLE_MODERATOR),
                         new Role(ERole.ROLE_USER))
                 );
-                listOfRoles.forEach(System.out::println);
                 if(!CollectionUtils.isEmpty(listOfRoles)){
                     roleRepository.saveAll(listOfRoles);
                     logger.info("All roles successful save !!!!");
