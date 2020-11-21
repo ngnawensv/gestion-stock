@@ -1,11 +1,14 @@
 package cm.belrose.stockserveur.config.initializer;
 
 import cm.belrose.stockserveur.config.constants.Constant;
+import cm.belrose.stockserveur.model.Categorie;
 import cm.belrose.stockserveur.model.ERole;
 import cm.belrose.stockserveur.model.Role;
 import cm.belrose.stockserveur.model.User;
+import cm.belrose.stockserveur.repository.CategorieRepository;
 import cm.belrose.stockserveur.repository.RoleRepository;
 import cm.belrose.stockserveur.repository.UserRepository;
+import io.jsonwebtoken.lang.Assert;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +39,8 @@ public class InitializeDataBase implements CommandLineRunner {
     private RoleRepository roleRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private CategorieRepository categorieRepository;
 
     @Override
     @Transactional
@@ -64,6 +69,21 @@ public class InitializeDataBase implements CommandLineRunner {
             } else {
                 logger.info("Super user is already exist!!!!");
             }
+
+            // Creation an default category ........
+            List<Categorie> categories;
+            Categorie default_categorie = categorieRepository.findByNom(Constant.DEFAULT_CATEGORIE_NAME);
+            if(default_categorie==null){
+                Assert.isNull(default_categorie);
+                Categorie defaultCategorie = new Categorie("0000", "Default_cat");
+                categories = new ArrayList<>();
+                categories.add(defaultCategorie);
+                categorieRepository.save(defaultCategorie);
+                logger.info("Default category is successful create!!!!");
+            }else{
+                logger.info("Default category is already exist!!!!");
+            }
+
 
     }
 }

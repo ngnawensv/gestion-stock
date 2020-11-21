@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @author Ngnawen Samuel
  *
  */
-@Entity
+//@Entity
 public class ArticleCategorie implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

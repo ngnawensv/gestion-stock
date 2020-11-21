@@ -23,6 +23,13 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
  * WebSecurityConfigurerAdapter is the crux of our security implementation.
  * It provides HttpSecurity configurations to configure cors, csrf, session management, rules for protected resources.
  * We can also extend and customize the default configuration that contains the elements below
+ *
+ * prePostEnabled: It enables more complex expression based access control syntax with @PreAuthorize and @PostAuthorize
+ * annotations
+ *
+ * jsr250EnabledIt enables the @RolesAllowed annotation that can be used
+ *
+ * securedEnabled: It enables the @Secured annotation using which you can protect your controller/service methods
  */
 
 @Configuration

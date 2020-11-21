@@ -1,8 +1,14 @@
 package cm.belrose.stockserveur.model;
 
+import cm.belrose.stockserveur.config.audit.Auditable;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.NotAudited;
+
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.*;
 
 /**
  * Le 09/11/2020
@@ -10,26 +16,64 @@ import java.util.Collection;
  *@author  Ngnawen Samuel
  *
  */
+@Audited
 @Entity
-public class Article implements Serializable {
+@Table(name = "articles")
+public class Article extends Auditable<String> implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_article")
     private Long id;
+    @Column(name = "nom_article")
     private String nom;
+    @Column(name = "prix_achat_article")
     private double prixAchat;
+    @Column(name = "prix_vente_article")
     private double prixVente;
-    @OneToMany(mappedBy = "article")
+    @Column(name = "quantite_article")
+    private double quantite;
+    @ManyToMany(fetch = FetchType.LAZY,cascade={CascadeType.PERSIST,CascadeType.REFRESH, CascadeType.MERGE})
+    @JoinTable(
+            name = "article_categorie",
+            joinColumns = @JoinColumn(name = "article_id"),
+            inverseJoinColumns = @JoinColumn(name = "categorie_id")
+    )
+    //@NotAudited
+    private Set<Categorie> listOfCategories;
+
+    @OneToMany(mappedBy = "article",cascade = CascadeType.ALL)
+    @NotAudited
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    //@JsonIgnoreProperties("commandeClients")
     private Collection<CommandeClient> commandeClients;
-    @OneToMany(mappedBy = "article")
-    private Collection<ArticleCategorie> articleCategories;
-    @OneToMany(mappedBy = "article")
+
+    @OneToMany(mappedBy = "article",cascade = CascadeType.ALL)
+    @NotAudited
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Collection<ArticleVente> articleVentes;
-    @OneToMany (mappedBy = "article")
+    @OneToMany (mappedBy = "article",cascade = CascadeType.ALL)
+    @NotAudited
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Collection<Image> images;
-    @OneToMany(mappedBy = "article")
+    @OneToMany(mappedBy = "article",cascade = CascadeType.ALL)
+    @NotAudited
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Collection<LivraisonFournisseur> livraisonFournisseurs;
-    @OneToMany(mappedBy = "article")
+    @OneToMany(mappedBy = "article",cascade = CascadeType.ALL)
+    @NotAudited
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Collection<MouvementStock> mouvementStocks;
+
+    public Article() {
+    }
+
+    public Article(String nom, double prixAchat, double prixVente, double quantite, Set<Categorie> listOfCategories) {
+        this.nom = nom;
+        this.prixAchat = prixAchat;
+        this.prixVente = prixVente;
+        this.quantite = quantite;
+        this.listOfCategories = listOfCategories;
+    }
 
     public Long getId() {
         return id;
@@ -63,6 +107,14 @@ public class Article implements Serializable {
         this.prixVente = prixVente;
     }
 
+    public double getQuantite() {
+        return quantite;
+    }
+
+    public void setQuantite(double quantite) {
+        this.quantite = quantite;
+    }
+
     public Collection<CommandeClient> getCommandeClients() {
         return commandeClients;
     }
@@ -71,12 +123,12 @@ public class Article implements Serializable {
         this.commandeClients = commandeClients;
     }
 
-    public Collection<ArticleCategorie> getArticleCategories() {
-        return articleCategories;
+    public Set<Categorie> getListOfCategories() {
+        return listOfCategories;
     }
 
-    public void setArticleCategories(Collection<ArticleCategorie> articleCategories) {
-        this.articleCategories = articleCategories;
+    public void setListOfCategories(Set<Categorie> listOfCategories) {
+        this.listOfCategories = listOfCategories;
     }
 
     public Collection<ArticleVente> getArticleVentes() {
@@ -110,4 +162,5 @@ public class Article implements Serializable {
     public void setMouvementStocks(Collection<MouvementStock> mouvementStocks) {
         this.mouvementStocks = mouvementStocks;
     }
+
 }

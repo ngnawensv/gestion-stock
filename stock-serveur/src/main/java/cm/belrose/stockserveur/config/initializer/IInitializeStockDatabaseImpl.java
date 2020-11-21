@@ -20,8 +20,7 @@ public class IInitializeStockDatabaseImpl implements IInitializeStockDatabase {
     private ImageRepository imageRepository;
     @Autowired
     private ArticleRepository articleRepository;
-    @Autowired
-    private ArticleCategorieRepository articleCategorieRepository;
+    ///private ArticleCategorieRepository articleCategorieRepository;
     @Autowired
     private ArticleVenteRepository articleVenteRepository;
     @Autowired
@@ -54,7 +53,7 @@ public class IInitializeStockDatabaseImpl implements IInitializeStockDatabase {
                 ArticleCategorie articleCategorie=new ArticleCategorie();
                 articleCategorie.setArticle(article);
                 articleCategorie.setCategorie(categorie);
-                articleCategorieRepository.save(articleCategorie);
+                //articleCategorieRepository.save(articleCategorie);
             });
         });
     }
@@ -72,14 +71,14 @@ public class IInitializeStockDatabaseImpl implements IInitializeStockDatabase {
 
     @Override
     public void initArticle() {
-        double[] prix=new double[]{100.0,150.0,200.0,300.0};
+        /*double[] prix=new double[]{100.0,150.0,200.0,300.0};
         Stream.of("Article 1","article 2","Article 3","Article 4","Article 5").forEach(nomArticle->{
             Article article=new Article();
             article.setNom(nomArticle);
             article.setPrixAchat(prix[new Random().nextInt(prix.length)]);
             article.setPrixVente(prix[new Random().nextInt(prix.length)]);
             articleRepository.save(article);
-        });
+        });*/
 
     }
 

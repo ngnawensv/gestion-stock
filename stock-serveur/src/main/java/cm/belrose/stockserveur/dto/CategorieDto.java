@@ -1,6 +1,6 @@
 package cm.belrose.stockserveur.dto;
 
-public class CategorieDto {
+public class CategorieDTO {
 
     private String code;
     private String nom;

@@ -33,6 +33,8 @@ public interface CategorieRepository  extends RevisionRepository<Categorie, Long
 
    // returns all Categories which "nom" contains input "nom"
     List<Categorie> findByNomContaining(String nom);
+
+    Categorie findByNom(String nom);
     
     @Query("select cat from Categorie cat where cat.nom like :x")
     Page<Categorie> chercher(@Param("x") String keyword, Pageable pageable);

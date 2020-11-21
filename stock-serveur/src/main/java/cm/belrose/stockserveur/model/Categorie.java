@@ -1,12 +1,13 @@
 package cm.belrose.stockserveur.model;
 import cm.belrose.stockserveur.config.audit.Auditable;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.envers.Audited;
 import org.hibernate.envers.NotAudited;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.*;
 
 /**
  *
@@ -16,21 +17,30 @@ import java.util.Collection;
  */
 @Audited
 @Entity
-@Table(uniqueConstraints = {@UniqueConstraint(columnNames = "nom")})
+@Table(
+        name = "categories",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = "code_categorie"),
+                @UniqueConstraint(columnNames = "nom_categorie")
+        }
+)
 public class Categorie extends Auditable<String> implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotBlank(message = "Code of category must not be null")
+    @Column(name = "code_categorie")
     private String code;
 
     @NotBlank(message = "Name of category must not be null")
+    @Column(name = "nom_categorie")
     private String nom;
 
-    @OneToMany(mappedBy = "categorie")
+    @ManyToMany(mappedBy = "listOfCategories", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @NotAudited
-    private Collection<ArticleCategorie> articleCategories;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private List<Article> listOfArticles=new ArrayList<>();
 
     public Categorie() {
     }
@@ -63,11 +73,21 @@ public class Categorie extends Auditable<String> implements Serializable {
     public void setNom(String nom) {
         this.nom = nom;
     }
-    public Collection<ArticleCategorie> getArticleCategories() {
-        return articleCategories;
+
+    public List<Article> getListOfArticles() {
+        return listOfArticles;
     }
 
-    public void setArticleCategories(Collection<ArticleCategorie> articleCategories) {
-        this.articleCategories = articleCategories;
+    public void setListOfArticles(List<Article> listOfArticles) {
+        this.listOfArticles = listOfArticles;
+    }
+
+    @Override
+    public String toString() {
+        return "Categorie{" +
+                "id=" + id +
+                ", code='" + code + '\'' +
+                ", nom='" + nom + '\'' +
+                '}';
     }
 }

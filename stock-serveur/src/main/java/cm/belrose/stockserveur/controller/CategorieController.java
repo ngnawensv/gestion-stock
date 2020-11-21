@@ -1,10 +1,6 @@
 package cm.belrose.stockserveur.controller;
 
-import cm.belrose.stockserveur.dto.CategorieDto;
-import cm.belrose.stockserveur.model.Article;
 import cm.belrose.stockserveur.model.Categorie;
-import cm.belrose.stockserveur.payload.response.MessageResponse;
-import cm.belrose.stockserveur.service.ArticleService;
 import cm.belrose.stockserveur.service.CategorieService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Consumer;
 
 /**
  * Le 11/11/2020
@@ -52,13 +49,14 @@ public class CategorieController {
      * @throws Exception
      */
     @GetMapping("/categories")
-    public ResponseEntity<List<Categorie>> getAllCategories(@RequestParam(required = false) String nom) throws Exception{
+    public ResponseEntity<List<Categorie>> getAll(@RequestParam(required = false) String nom) throws Exception{
         try{
             List<Categorie> categories=new ArrayList<>();
+            Consumer<Categorie> consumer=categories::add;
             if (nom == null)
-                categorieService.findAll().forEach(categories::add);
+                categorieService.findAll().forEach(consumer);
             else
-                categorieService.findByNomContaining(nom).forEach(categories::add);
+                categorieService.findByNomContaining(nom).forEach(consumer);
             if (categories.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
@@ -87,7 +85,7 @@ public class CategorieController {
 
 
    /* @PostMapping("/categories")
-    public  ResponseEntity<MessageResponse> saveCategorie(@RequestBody CategorieDto categorieDto) throws Exception{
+    public  ResponseEntity<MessageResponse> saveCategorie(@RequestBody CategorieDTO categorieDto) throws Exception{
         if(categorieService.existsByNom(categorieDto.getNom())){
             return new ResponseEntity(new MessageResponse(categorieDto.getNom()+" category already existe "),HttpStatus.BAD_REQUEST);
         }
@@ -96,10 +94,10 @@ public class CategorieController {
     }
 */
     @PostMapping("/categories")
-    public  ResponseEntity<Categorie> saveCategorie(@RequestBody Categorie categorie) throws Exception{
+    public  ResponseEntity<Categorie> save(@RequestBody Categorie categorie) throws Exception{
         try {
-            Categorie _categorie = categorieService.save(new Categorie(categorie.getCode(),categorie.getNom()));
-            return new ResponseEntity<>(_categorie, HttpStatus.CREATED);
+            //Categorie _categorie = categorieService.save(new Categorie(categorie.getCode(),categorie.getNom()));
+            return new ResponseEntity<>( categorieService.save(categorie), HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -107,7 +105,7 @@ public class CategorieController {
 
 
     /*@PutMapping("/categories/{id}")
-    public  ResponseEntity<Categorie> updateCategorie(@PathVariable("id") Long id, @RequestBody CategorieDto categorieDto) throws Exception{
+    public  ResponseEntity<Categorie> updateCategorie(@PathVariable("id") Long id, @RequestBody CategorieDTO categorieDto) throws Exception{
        Optional<Categorie> cat=categorieService.findById(id);
        System.out.println("Cat: "+cat);
         if(cat.isEmpty()){
@@ -122,7 +120,7 @@ public class CategorieController {
 */
 
     @PutMapping("/categories/{id}")
-    public ResponseEntity<Categorie> updateCategorie(@PathVariable("id") long id, @RequestBody Categorie categorie) throws Exception {
+    public ResponseEntity<Categorie> update(@PathVariable("id") long id, @RequestBody Categorie categorie) throws Exception {
         Optional<Categorie> categorieData = categorieService.findById(id);
         if (categorieData.isPresent()) {
             Categorie _categorie = categorieData.get();
@@ -151,11 +149,9 @@ public class CategorieController {
     }*/
 
     @DeleteMapping("/categories/{id}")
-    public ResponseEntity<HttpStatus> deleteCategorie(@PathVariable("id") Long id) {
-        System.out.println("Inside delete.....");
+    public ResponseEntity<HttpStatus> delete(@PathVariable("id") Long id) {
         try {
             categorieService.deleteById(id);
-            System.out.println("Successful delete.....");
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -163,7 +159,7 @@ public class CategorieController {
     }
 
     @DeleteMapping("/categories")
-    public ResponseEntity<HttpStatus> deleteAllCateries() {
+    public ResponseEntity<HttpStatus> deleteAll() {
         try {
             categorieService.deleteAll();
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -181,11 +177,11 @@ public class CategorieController {
      * @return
      * @throws Exception
      */
-    @GetMapping("/chercher")
+   /* @GetMapping("/chercher")
     public Page<Categorie> chercherContact(@RequestParam(name = "keyword",defaultValue = "") String keyword,
                                            @RequestParam(name = "page",defaultValue = "0") int page,
                                            @RequestParam(name = "size",defaultValue = "2") int size) throws Exception{
         Pageable paging = PageRequest.of(page, size);
         return categorieService.cherhcer("%"+keyword+"%", paging);
-    }
+    }*/
 }

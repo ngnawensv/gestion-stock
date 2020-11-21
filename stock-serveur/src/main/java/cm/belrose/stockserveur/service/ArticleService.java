@@ -1,5 +1,6 @@
 package cm.belrose.stockserveur.service;
 
+import cm.belrose.stockserveur.dto.ArticleDTO;
 import cm.belrose.stockserveur.model.Article;
 
 import java.util.List;
@@ -11,9 +12,15 @@ public interface ArticleService {
 
      List<Article> findAll() throws Exception;
 
-     Article save(Article article) throws Exception;
+     Article save(ArticleDTO articleDTO) throws Exception;
 
      Article update(Article article) throws Exception;
 
      void delete(Article article) throws Exception;
+
+     void deleteById(Long id);
+
+     void deleteAll();
+
+     List<Article> findByNomContaining(String nom);
 }
