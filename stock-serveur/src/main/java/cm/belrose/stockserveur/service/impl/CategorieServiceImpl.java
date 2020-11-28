@@ -107,8 +107,8 @@ public class CategorieServiceImpl implements CategorieService {
     }*/
 
     @Override
-    public Categorie findByNom(String nom) {
-        return categorieRepository.findByNom(nom);
+    public Categorie findByCode(String code) {
+        return categorieRepository.findByCode(code);
     }
 
     @Override

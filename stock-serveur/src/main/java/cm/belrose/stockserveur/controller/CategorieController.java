@@ -27,32 +27,34 @@ import java.util.function.Consumer;
 @RequestMapping("/api")
 public class CategorieController {
 
-    private static final Logger logger= LoggerFactory.getLogger(CategorieController.class);
+    private static final Logger logger = LoggerFactory.getLogger(CategorieController.class);
 
     @Autowired
     CategorieService categorieService;
 
     /**
      * retrieve all Categories
+     *
      * @return
      * @throws Exception
      */
     @GetMapping("/categories1")
-    public List<Categorie> findAll1() throws Exception{
+    public List<Categorie> findAll1() throws Exception {
         return categorieService.findAll();
     }
 
     /**
      * retrieve all Categories with ResponseEntity
+     *
      * @param nom
      * @return
      * @throws Exception
      */
     @GetMapping("/categories")
-    public ResponseEntity<List<Categorie>> getAll(@RequestParam(required = false) String nom) throws Exception{
-        try{
-            List<Categorie> categories=new ArrayList<>();
-            Consumer<Categorie> consumer=categories::add;
+    public ResponseEntity<List<Categorie>> getAll(@RequestParam(required = false) String nom) throws Exception {
+        try {
+            List<Categorie> categories = new ArrayList<>();
+            Consumer<Categorie> consumer = categories::add;
             if (nom == null)
                 categorieService.findAll().forEach(consumer);
             else
@@ -66,14 +68,25 @@ public class CategorieController {
         }
     }
 
+    @GetMapping("/categories/code")
+    public ResponseEntity<Categorie> getCategorieByCode(@RequestParam(required = false) String code) throws Exception {
+        try {
+            Categorie categorie = categorieService.findByCode(code);
+            return new ResponseEntity<>(categorie, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     /**
      * retrieve a Category by :id
+     *
      * @param id
      * @return
      * @throws Exception
      */
     @GetMapping("/categories/{id}")
-    public  ResponseEntity<Categorie> findById(@PathVariable("id") Long id) throws Exception{
+    public ResponseEntity<Categorie> findById(@PathVariable("id") Long id) throws Exception {
         Optional<Categorie> categorieData = categorieService.findById(id);
 
         if (categorieData.isPresent()) {
@@ -84,20 +97,20 @@ public class CategorieController {
     }
 
 
-   /* @PostMapping("/categories")
-    public  ResponseEntity<MessageResponse> saveCategorie(@RequestBody CategorieDTO categorieDto) throws Exception{
-        if(categorieService.existsByNom(categorieDto.getNom())){
-            return new ResponseEntity(new MessageResponse(categorieDto.getNom()+" category already existe "),HttpStatus.BAD_REQUEST);
-        }
-        categorieService.save(categorieDto);
-        return new ResponseEntity<>(new MessageResponse(categorieDto.getNom()+" category successful save!"),HttpStatus.CREATED);
-    }
-*/
+    /* @PostMapping("/categories")
+     public  ResponseEntity<MessageResponse> saveCategorie(@RequestBody CategorieDTO categorieDto) throws Exception{
+         if(categorieService.existsByNom(categorieDto.getNom())){
+             return new ResponseEntity(new MessageResponse(categorieDto.getNom()+" category already existe "),HttpStatus.BAD_REQUEST);
+         }
+         categorieService.save(categorieDto);
+         return new ResponseEntity<>(new MessageResponse(categorieDto.getNom()+" category successful save!"),HttpStatus.CREATED);
+     }
+ */
     @PostMapping("/categories")
-    public  ResponseEntity<Categorie> save(@RequestBody Categorie categorie) throws Exception{
+    public ResponseEntity<Categorie> save(@RequestBody Categorie categorie) throws Exception {
         try {
             //Categorie _categorie = categorieService.save(new Categorie(categorie.getCode(),categorie.getNom()));
-            return new ResponseEntity<>( categorieService.save(categorie), HttpStatus.CREATED);
+            return new ResponseEntity<>(categorieService.save(categorie), HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -135,6 +148,7 @@ public class CategorieController {
 
     /**
      * delete a Category by :id
+     *
      * @param id
      * @return
      * @throws Exception
@@ -147,7 +161,6 @@ public class CategorieController {
         }
        return new ResponseEntity<>(HttpStatus.GONE);
     }*/
-
     @DeleteMapping("/categories/{id}")
     public ResponseEntity<HttpStatus> delete(@PathVariable("id") Long id) {
         try {

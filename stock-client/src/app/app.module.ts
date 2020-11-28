@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import {LoginComponent} from "./login/login.component";
 import {RegisterComponent} from "./register/register.component";
 import {HomeComponent} from "./home/home.component";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {TranslateModule, TranslateService} from "@ngx-translate/core";
 import {authInterceptorProviders} from "./_helpers/auth.interceptor";
@@ -18,6 +18,7 @@ import { CategorieComponent } from './categorie/categorie.component';
 import { AddCategorieComponent } from './add-categorie/add-categorie.component';
 import {DataTablesModule} from "angular-datatables";
 import { UpdateCategorieComponent } from './update-categorie/update-categorie.component';
+import { AddArticleComponent } from './add-article/add-article.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +30,8 @@ import { UpdateCategorieComponent } from './update-categorie/update-categorie.co
     ParametreComponent,
     CategorieComponent,
     AddCategorieComponent,
-    UpdateCategorieComponent
+    UpdateCategorieComponent,
+    AddArticleComponent
   ],
   imports: [
     BrowserModule,
@@ -37,6 +39,7 @@ import { UpdateCategorieComponent } from './update-categorie/update-categorie.co
     FormsModule,
     HttpClientModule,
     DataTablesModule,
+    ReactiveFormsModule,
     TranslateModule.forRoot() //Module import for i18n see https://levelup.gitconnected.com/angular-internationalization-i18n-with-ngx-translate-8f89005cb337
   ],
   providers: [

@@ -10,6 +10,7 @@ import {ParametreComponent} from "./parametre/parametre.component";
 import {CategorieComponent} from "./categorie/categorie.component";
 import {AddCategorieComponent} from "./add-categorie/add-categorie.component";
 import {UpdateCategorieComponent} from "./update-categorie/update-categorie.component";
+import {AddArticleComponent} from "./add-article/add-article.component";
 
 
 /**
@@ -25,6 +26,8 @@ const routes: Routes = [
   { path: 'parametre', component: ParametreComponent,canActivate:[AuthGuard] },//Association de AuthGuard a la route admin
   { path: 'categories', component: CategorieComponent,canActivate:[AuthGuard] },
   { path: 'categories/add', component: AddCategorieComponent,canActivate:[AuthGuard] },
+  { path: 'articles', component: ArticleComponent,canActivate:[AuthGuard] },
+  { path: 'articles/add', component: AddArticleComponent,canActivate:[AuthGuard] },
   { path: '**', component: HomeComponent }
 ];
 

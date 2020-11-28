@@ -2,7 +2,6 @@ package cm.belrose.stockserveur.controller;
 
 import cm.belrose.stockserveur.dto.ArticleDTO;
 import cm.belrose.stockserveur.model.Article;
-import cm.belrose.stockserveur.model.Categorie;
 import cm.belrose.stockserveur.payload.response.MessageResponse;
 import cm.belrose.stockserveur.service.ArticleService;
 import org.slf4j.Logger;
@@ -38,7 +37,7 @@ public class ArticleController {
             List<Article> articles = new ArrayList<>();
             //Creating Consumer for article object which will be used in forEach method for adding article on the list
             Consumer<Article> consumer= article->articles.add(article);
-            //Consumer<Article> consumer1= articles::add; // same with the above consumer by using reference methode
+            //Consumer<Article> consumer1= articles::add; // same with the above consumer by using reference method
             if (nom == null)
                 articleService.findAll().forEach(consumer);
             else

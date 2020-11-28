@@ -8,15 +8,20 @@
       <li class="nav-item" *ngIf="showAdminBoard">
         <a href="/admin" class="nav-link" routerLink="admin">{{'main.page.app.AdminBoard' | translate}}</a>
       </li>
-      <li class="nav-item dropdown btn-info" *ngIf="showAdminBoard || showModeratorBoard">
-        <a  class="nav-link dropdown-toggle btn-info" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <li class="nav-item dropdown" *ngIf="showAdminBoard || showModeratorBoard">
+        <a  class="nav-link" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           {{'app.component.parametres' | translate}}
         </a>
         <div class="dropdown-menu" >
           <a  href="/categories" class="dropdown-item menu-item btn-info" role="button" routerLink="categories">
-           {{'app.component.categorie' | translate}}
+           {{'app.component.categories' | translate}}
+          </a>
+          <hr>
+          <a  href="/articles" class="dropdown-item menu-item btn-info" role="button" routerLink="articles">
+            {{'app.component.articles' | translate}}
           </a>
         </div>
+
       </li>
       <!--<li class="nav-item" *ngIf="showModeratorBoard">
         <a href="/mod" class="nav-link" routerLink="mod">{{'main.page.app.ModeratorBoard' | translate}}</a>

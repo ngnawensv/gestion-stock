@@ -34,7 +34,7 @@ public interface CategorieService {
 
     //Page<Categorie> cherhcer(String keyword, Pageable pageable);
 
-    Categorie findByNom(String nom);
+    Categorie findByCode(String code);
 
     List<Categorie> findByNomContaining(String nom);
 }

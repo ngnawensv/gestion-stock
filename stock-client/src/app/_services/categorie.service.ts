@@ -21,8 +21,8 @@ export class CategorieService {
     return this.http.get(baseUrl);
   }
 
-  get(id):Observable<Categorie[]> {
-    return this.http.get<Categorie[]>(`${baseUrl}/${id}`);
+  getCategorieById(id):Observable<Categorie> {
+    return this.http.get<Categorie>(`${baseUrl}/${id}`);
   }
 
   create(data) {
@@ -44,6 +44,10 @@ export class CategorieService {
 
   findByTitle(nom):Observable<Categorie[]> {
     return this.http.get<Categorie[]>(`${baseUrl}?nom=${nom}`);
+  }
+
+  findByCode(code):Observable<Categorie> {
+    return this.http.get<Categorie>(`${baseUrl}/code?code=${code}`);
   }
 
 }
