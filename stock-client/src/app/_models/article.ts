@@ -6,5 +6,5 @@ export class Article {
   prixAchat:number;
   prixVente:number;
   quantite:number;
-  listOfCategories: Categorie[];
+  categorie: Categorie;
 }

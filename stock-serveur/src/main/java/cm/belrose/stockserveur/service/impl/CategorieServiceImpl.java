@@ -1,6 +1,5 @@
 package cm.belrose.stockserveur.service.impl;
 
-import cm.belrose.stockserveur.dto.CategorieDTO;
 import cm.belrose.stockserveur.model.Categorie;
 import cm.belrose.stockserveur.repository.CategorieRepository;
 import cm.belrose.stockserveur.service.CategorieService;
@@ -8,14 +7,9 @@ import io.jsonwebtoken.lang.Assert;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.CollectionUtils;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -98,7 +92,7 @@ public class CategorieServiceImpl implements CategorieService {
 
     @Override
     public Boolean existsByNom(String nom) {
-        return categorieRepository.existsByNom(nom);
+        return categorieRepository.existsByLibelle(nom);
     }
 
    /* @Override
@@ -113,6 +107,6 @@ public class CategorieServiceImpl implements CategorieService {
 
     @Override
     public List<Categorie> findByNomContaining(String nom) {
-        return categorieRepository.findByNomContaining(nom);
+        return categorieRepository.findByLibelleContaining(nom);
     }
 }

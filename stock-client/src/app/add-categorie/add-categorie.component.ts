@@ -11,14 +11,9 @@ export class AddCategorieComponent implements OnInit {
 
   public categorie = {code: '', nom: ''};
   submitted=false;
-
   constructor(private categorieServie: CategorieService,private router:Router) { }
-
-
   ngOnInit(): void {
   }
-
-
   saveCategorie() {
     const data = { code: this.categorie.code, nom: this.categorie.nom};
     this.categorieServie.create(data)
@@ -31,7 +26,6 @@ export class AddCategorieComponent implements OnInit {
           console.log(error);
         });
   }
-
   newCategorie() {
     this.submitted = false;
     this.categorie = {code: '', nom: ''};

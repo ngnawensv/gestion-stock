@@ -1,6 +1,6 @@
 package cm.belrose.stockserveur.service.impl;
 
-import cm.belrose.stockserveur.model.ERole;
+import cm.belrose.stockserveur.model.RoleEnum;
 import cm.belrose.stockserveur.model.Role;
 import cm.belrose.stockserveur.repository.RoleRepository;
 import cm.belrose.stockserveur.service.RoleService;
@@ -22,7 +22,7 @@ public class RoleServiceImpl implements RoleService {
     RoleRepository roleRepository;
 
     @Override
-    public Optional<Role> findByName(ERole name) {
+    public Optional<Role> findByName(RoleEnum name) {
         return roleRepository.findByName(name);
     }
 

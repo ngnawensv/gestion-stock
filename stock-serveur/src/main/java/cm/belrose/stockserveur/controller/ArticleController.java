@@ -88,7 +88,7 @@ public class ArticleController {
         if (articleData.isPresent()) {
             Article _article= articleData.get();
             _article.setId(id);
-            _article.setNom(article.getNom());
+            _article.setDesignation(article.getDesignation());
             _article.setPrixAchat(article.getPrixAchat());
             _article.setPrixVente(article.getPrixVente());
             _article.setQuantite(article.getQuantite());

@@ -11,7 +11,6 @@ import {Router} from "@angular/router";
 export class CategorieComponent implements OnInit {
 
   categories:Categorie[];
-  currentCategorie = null;
   currentIndex = -1;
   nom = '';
   submited=false;
@@ -38,30 +37,6 @@ export class CategorieComponent implements OnInit {
         console.log("Erreur: " + error);
       });
   }
-
-  refreshList() {
-    this.getAllCategories();
-    this.currentCategorie = null;
-    this.currentIndex = -1;
-  }
-
-  setActiveTutorial(tutorial, index) {
-    this.currentCategorie = tutorial;
-    this.currentIndex = index;
-  }
-
-  removeAllTutorials() {
-    this.categorieServie.deleteAll()
-      .subscribe(
-        response => {
-          console.log(response);
-          this.getAllCategories();
-        },
-        error => {
-          console.log(error);
-        });
-  }
-
   /**
    *
    */
@@ -69,8 +44,8 @@ export class CategorieComponent implements OnInit {
     this.categorieServie.findByTitle(this.nom)
       .subscribe(
         data => {
-          this.categories = data;
-          console.log(data);
+            this.categories = data;
+            console.log(data);
         },
         error => {
           console.log(error);
@@ -92,41 +67,13 @@ export class CategorieComponent implements OnInit {
   }
 
   /**
-   * Methode pour afficher le formulaire de mise à jour
+   * This method redirect to edit-categorie.component with categorie id
    * @param id
-   * @param currentCategorie
    */
-  editCategorie(currentCategorie) {
-   // this.currentCategorie.id=id;
-    this.currentCategorie=currentCategorie;
-    console.log(this.currentCategorie.id);
-    console.log(this.currentCategorie.code);
-    console.log(this.currentCategorie.nom)
-    //this.router.navigate(['/categories/edit']);
+  editCategorie1(id) {
+    this.router.navigate(['categories/edit',id]);
   }
 
-  /**
-   * Methode pour mettre a jour un formualire
-   * @param id
-   * @param currentCategorie
-   */
-  updateCategorie(currentCategorie) {
-    this.categorieServie.update(currentCategorie.id, currentCategorie)
-      .subscribe(
-        response => {
-          console.log(response);
-          this.submited=true;
-          this.currentCategorie=null;
-        },
-        error => {
-          console.log(error);
-        });
-  }
-
-  retourArriere(){
-    this.currentCategorie=null;
-    this.router.navigateByUrl("/categories")
-  }
 
 
 }

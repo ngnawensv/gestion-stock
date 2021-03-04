@@ -25,16 +25,16 @@ import java.util.List;
 @Repository
 public interface CategorieRepository  extends RevisionRepository<Categorie, Long, Long>, JpaRepository<Categorie, Long> {
 
-    Boolean existsByNom(String nom);
+    Boolean existsByLibelle(String libelle);
 
     void deleteById(Long id);
 
     void deleteAll();
 
    // returns all Categories which "nom" contains input "nom"
-    List<Categorie> findByNomContaining(String nom);
+    List<Categorie> findByLibelleContaining(String libelle);
 
-    Categorie findByNom(String nom);
+    Categorie findByLibelle(String libelle);
 
     Categorie findByCode(String code);
 

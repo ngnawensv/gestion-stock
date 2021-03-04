@@ -1,0 +1,11 @@
+cm\belrose\stockserveur\model\CommandeFournisseur.class
+cm\belrose\stockserveur\model\Entreprise.class
+cm\belrose\stockserveur\model\Fournisseur.class
+cm\belrose\stockserveur\model\RoleEnum.class
+cm\belrose\stockserveur\model\SousCategorie.class
+cm\belrose\stockserveur\model\LigneCommandeFournisseur.class
+cm\belrose\stockserveur\model\LigneCommandeClient.class
+cm\belrose\stockserveur\model\AbstractAudingEntity.class
+cm\belrose\stockserveur\model\LigneVente.class
+cm\belrose\stockserveur\model\Adresse.class
+cm\belrose\stockserveur\model\Client.class

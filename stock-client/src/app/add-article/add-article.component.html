@@ -20,7 +20,7 @@
           <input class="form-control" id="quantite" required [(ngModel)]="article.quantite" name="quantite"/>
         </div>
         <div class="form-group">
-          <label for="categorie">Categories</label>
+          <label for="categorie">Categorie</label>
           <select [(ngModel)]="categorieIdSelected" (ngModelChange)="onCategorieSelected($event)" class="form-control" id="categorie" name="categorie">
             <option *ngFor="let cat of listOfCategories" [value]="cat.id">
               {{cat.nom}}

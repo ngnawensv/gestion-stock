@@ -1,5 +1,10 @@
 package cm.belrose.stockserveur.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Collection;
@@ -11,32 +16,12 @@ import java.util.Collection;
  *@author  Ngnawen Samuel
  *
  */
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 @Entity
-public class Vente implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+@Table(name = "ventes")
+public class Vente extends AbstractAudingEntity<String> implements Serializable {
     private String code;
-    @OneToMany(mappedBy = "vente")
-    private Collection<ArticleVente> articleVentes;
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public Collection<ArticleVente> getArticleVentes() {
-        return articleVentes;
-    }
-
-    public void setArticleVentes(Collection<ArticleVente> articleVentes) {
-        this.articleVentes = articleVentes;
-    }
 }

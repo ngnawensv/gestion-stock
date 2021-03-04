@@ -23,7 +23,7 @@ export class ArticleService {
     return this.http.get(baseUrl);
   }
 
-  getById(id):Observable<Article> {
+  getArticleById(id):Observable<Article> {
     return this.http.get<Article>(`${baseUrl}/${id}`);
   }
 

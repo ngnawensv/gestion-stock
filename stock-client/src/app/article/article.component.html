@@ -42,7 +42,7 @@
           <td>{{article.quantite}}</td>
           <td *ngIf="!article_details">
             <button type="button" class="btn btn-info btn-space" (click)="detailsArticle(article)">Details</button>
-            <button type="button" class="btn btn-info btn-space" (click)="editArticle(article)">Edit</button>
+            <button type="button" class="btn btn-info btn-space" (click)="editArticle(article.id)">Edit</button>
             <button type="button" class="btn btn-danger btn-space" (click)="deleteArticle(article.id)">Delete</button>
           </td>
         </tr>
@@ -81,38 +81,6 @@
           </tbody>
         </table>
       </div>
-    </div>
-    <div class="submit-form" *ngIf="currentArticle">
-      <form>
-        <div class="form-group">
-          <label for="code">Nom</label>
-          <input type="text" class="form-control" id="code" [(ngModel)]="currentArticle.nom" name="code"/>
-        </div>
-        <div class="form-group">
-          <label for="pa">Prix d'achat</label>
-          <input type="text" class="form-control" id="pa" [(ngModel)]="currentArticle.prixAchat" name="pa"/>
-        </div>
-        <div class="form-group">
-          <label for="pv">Prix de vente</label>
-          <input type="text" class="form-control" id="pv" [(ngModel)]="currentArticle.prixVente" name="pv"/>
-        </div>
-        <div class="form-group">
-          <label for="quantite">Quantité</label>
-          <input type="text" class="form-control" id="quantite" [(ngModel)]="currentArticle.quantite" name="quantite"/>
-        </div>
-        <!--<div class="form-group">
-          <label for="categorie">Categories</label>
-          <select [(ngModel)]="categorieSelected"
-                  (ngModelChange)="onCategorieSelected($event)"
-                  class="form-control" id="categorie" name="categorie">
-            <option *ngFor="let categorie of listCategorieOfArticle" [value]="categorie.id">
-              {{categorie.nom}}
-            </option>
-          </select>
-        </div>-->
-        <button (click)="updateArticle(currentArticle)" class="btn btn-success btn-space">Update</button>
-        <button (click)="retourArriere()" class="btn btn-warning btn-space">Back</button>
-      </form>
     </div>
   </div>
 </div>

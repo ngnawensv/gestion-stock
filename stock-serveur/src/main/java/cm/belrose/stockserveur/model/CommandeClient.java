@@ -1,7 +1,14 @@
 package cm.belrose.stockserveur.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.Instant;
+import java.util.List;
 
 /**
  *
@@ -10,46 +17,21 @@ import java.io.Serializable;
  *@author  Ngnawen Samuel
  *
  */
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 @Entity
-public class CommandeClient implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private int quantite;
-    @ManyToOne
-    private Article article;
-    @ManyToOne
-    private Personne personne;
+@Table(name = "Commandeclients")
+public class CommandeClient extends AbstractAudingEntity<String> implements Serializable {
+      private String code;
+      @Column(name = "date_commande")
+      private Instant dateCommande;
+      @ManyToOne
+      @JoinColumn(name = "client_id")
+      private Client client;
+      @OneToMany(mappedBy = "commandeClient")
+      private List<LigneCommandeClient> ligneCommandeClientList;
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public int getQuantite() {
-        return quantite;
-    }
-
-    public void setQuantite(int quantite) {
-        this.quantite = quantite;
-    }
-
-    public Article getArticle() {
-        return article;
-    }
-
-    public void setArticle(Article article) {
-        this.article = article;
-    }
-
-    public Personne getPersonne() {
-        return personne;
-    }
-
-    public void setPersonne(Personne personne) {
-        this.personne = personne;
-    }
 }

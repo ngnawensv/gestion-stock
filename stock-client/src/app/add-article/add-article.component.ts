@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import {ArticleService} from "../_services/article.service";
 import {Article} from "../_models/article";
 import {Categorie} from "../_models/categorie";
+import {logWarnings} from "protractor/built/driverProviders";
 
 @Component({
   selector: 'app-add-article',
@@ -12,13 +13,15 @@ import {Categorie} from "../_models/categorie";
 })
 export class AddArticleComponent implements OnInit {
 
-  public article = {nom: '', prixAchat:0, prixVente:0, quantite:0 ,listOfCategories:null};
+  public article = {nom: '', prixAchat:0, prixVente:0, quantite:0 ,categorie:null};
   submitted=false;
   listOfCategories:Categorie[];
   categorieIdSelected:number;
   categorieSelected:Categorie;
 
-  constructor(private articleService: ArticleService,private categorieService:CategorieService,private router:Router) { }
+  constructor(private articleService: ArticleService,
+              private categorieService:CategorieService,
+              private router:Router) { }
 
   ngOnInit(): void {
     this.getAllCategories();
@@ -31,12 +34,7 @@ export class AddArticleComponent implements OnInit {
       prixAchat: this.article.prixAchat,
       prixVente: this.article.prixVente,
       quantite: this.article.quantite,
-      listOfCategories:[
-        {
-          code:this.categorieSelected.code,
-          nom:this.categorieSelected.nom
-        }
-      ]
+      categorie: this.categorieSelected
     };
     this.articleService.create(data)
       .subscribe(
@@ -46,7 +44,8 @@ export class AddArticleComponent implements OnInit {
         },
         error => {
           console.log(error);
-        });
+        },
+      ()=>console.log("Succesfull end of observable..."));
   }
 
   /**
@@ -58,8 +57,7 @@ export class AddArticleComponent implements OnInit {
       .subscribe(
         response => {
           this.categorieSelected=response;
-          console.log("categorieSelected");
-          console.log(response);
+          console.log("categorieSelected "+this.categorieSelected.nom);
         },
         error => {
           console.log(error);
@@ -95,7 +93,7 @@ export class AddArticleComponent implements OnInit {
   newArticle() {
     this.getAllCategories();
     this.submitted = false;
-    this.article = {nom: '', prixAchat:0, prixVente:0, quantite:0, listOfCategories:this.getAllCategories()};
+   // this.article = {nom: '', prixAchat:0, prixVente:0, quantite:0, categorie:null};
   }
 
   retourArriere(){

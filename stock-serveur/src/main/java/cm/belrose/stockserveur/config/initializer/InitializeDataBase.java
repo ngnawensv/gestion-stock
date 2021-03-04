@@ -2,7 +2,7 @@ package cm.belrose.stockserveur.config.initializer;
 
 import cm.belrose.stockserveur.config.constants.Constant;
 import cm.belrose.stockserveur.model.Categorie;
-import cm.belrose.stockserveur.model.ERole;
+import cm.belrose.stockserveur.model.RoleEnum;
 import cm.belrose.stockserveur.model.Role;
 import cm.belrose.stockserveur.model.User;
 import cm.belrose.stockserveur.repository.CategorieRepository;
@@ -45,12 +45,12 @@ public class InitializeDataBase implements CommandLineRunner {
     @Override
     @Transactional
     public void run(String... args) throws Exception {
-            Optional<Role> role = roleRepository.findByName(ERole.ROLE_ADMIN);
+            Optional<Role> role = roleRepository.findByName(RoleEnum.ROLE_ADMIN);
             if (role.isEmpty()) {
                 Set<Role> listOfRoles = new HashSet<>(Arrays.asList(
-                        new Role(ERole.ROLE_ADMIN),
-                        new Role(ERole.ROLE_MODERATOR),
-                        new Role(ERole.ROLE_USER))
+                        new Role(RoleEnum.ROLE_ADMIN),
+                        new Role(RoleEnum.ROLE_MODERATOR),
+                        new Role(RoleEnum.ROLE_USER))
                 );
                 if(!CollectionUtils.isEmpty(listOfRoles)){
                     roleRepository.saveAll(listOfRoles);
@@ -72,10 +72,10 @@ public class InitializeDataBase implements CommandLineRunner {
 
             // Creation an default category ........
             List<Categorie> categories;
-            Categorie default_categorie = categorieRepository.findByNom(Constant.DEFAULT_CATEGORIE_NAME);
+            Categorie default_categorie = categorieRepository.findByLibelle(Constant.DEFAULT_CATEGORIE_NAME);
             if(default_categorie==null){
                 Assert.isNull(default_categorie);
-                Categorie defaultCategorie = new Categorie("0000", "Default_cat");
+                Categorie defaultCategorie = new Categorie("0000","Default",null);
                 categories = new ArrayList<>();
                 categories.add(defaultCategorie);
                 categorieRepository.save(defaultCategorie);

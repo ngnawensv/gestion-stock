@@ -12,7 +12,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.CollectionUtils;
 
 import java.util.*;
 
@@ -51,19 +50,14 @@ public class ArticleServiceImpl implements ArticleService {
      */
     @Override
     public Article save(ArticleDTO articleDTO) throws Exception {
-        Set<Categorie> categories = articleDTO.getListOfCategories();
-        Set<Categorie> _categories = new HashSet<>();
-        if (CollectionUtils.isEmpty(categories)|| categories==null) {
-            Categorie defaultCategorie = categorieRepository.findByNom(Constant.DEFAULT_CATEGORIE_NAME);
-            _categories.add(defaultCategorie);
-        }else {
-            categories.forEach(categorie -> {
-                Categorie _categorie = categorieRepository.findByNom(categorie.getNom());
-                _categories.add(_categorie);
-            });
+        Categorie categorie = articleDTO.getCategorie();
+
+        if (categorie==null) {
+            categorie = categorieRepository.findByLibelle(Constant.DEFAULT_CATEGORIE_NAME);
         }
-        Article article = new Article(articleDTO.getNom(), articleDTO.getPrixAchat(),
-                articleDTO.getPrixVente(), articleDTO.getQuantite(), _categories);
+        Article article = new Article(articleDTO.getCode(), articleDTO.getDesignation(),
+                articleDTO.getPrixUnitaireHt(),articleDTO.getTauxTva(),articleDTO.getPrixUnitaireTtc(),articleDTO.getPrixAchat(),
+                articleDTO.getPrixVente(),articleDTO.getQuantite(),categorie);
         logger.info("Article is successful save .....");
         return articleRepository.save(article);
     }
@@ -92,6 +86,6 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public List<Article> findByNomContaining(String nom) {
-        return articleRepository.findByNomContaining(nom);
+        return articleRepository.findByDesignationContaining(nom);
     }
 }

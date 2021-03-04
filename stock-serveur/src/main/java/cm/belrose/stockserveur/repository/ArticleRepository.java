@@ -12,5 +12,5 @@ import java.util.List;
 
 @RepositoryRestResource
 public interface ArticleRepository extends JpaRepository<Article, Long>{
-    List<Article> findByNomContaining(String nom);
+    List<Article> findByDesignationContaining(String designation);
 }

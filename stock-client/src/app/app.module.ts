@@ -19,6 +19,8 @@ import { AddCategorieComponent } from './add-categorie/add-categorie.component';
 import {DataTablesModule} from "angular-datatables";
 import { UpdateCategorieComponent } from './update-categorie/update-categorie.component';
 import { AddArticleComponent } from './add-article/add-article.component';
+import { EditCategorieComponent } from './edit-categorie/edit-categorie.component';
+import { EditArticleComponent } from './edit-article/edit-article.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +33,9 @@ import { AddArticleComponent } from './add-article/add-article.component';
     CategorieComponent,
     AddCategorieComponent,
     UpdateCategorieComponent,
-    AddArticleComponent
+    AddArticleComponent,
+    EditCategorieComponent,
+    EditArticleComponent
   ],
   imports: [
     BrowserModule,

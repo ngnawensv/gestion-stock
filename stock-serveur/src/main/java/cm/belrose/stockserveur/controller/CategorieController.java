@@ -99,7 +99,7 @@ public class CategorieController {
 
     /* @PostMapping("/categories")
      public  ResponseEntity<MessageResponse> saveCategorie(@RequestBody CategorieDTO categorieDto) throws Exception{
-         if(categorieService.existsByNom(categorieDto.getNom())){
+         if(categorieService.existsByLibelle(categorieDto.getNom())){
              return new ResponseEntity(new MessageResponse(categorieDto.getNom()+" category already existe "),HttpStatus.BAD_REQUEST);
          }
          categorieService.save(categorieDto);
@@ -139,7 +139,7 @@ public class CategorieController {
             Categorie _categorie = categorieData.get();
             _categorie.setId(id);
             _categorie.setCode(categorie.getCode());
-            _categorie.setNom(categorie.getNom());
+            _categorie.setLibelle(categorie.getLibelle());
             return new ResponseEntity<>(categorieService.update(_categorie), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

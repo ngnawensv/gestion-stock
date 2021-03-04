@@ -21,7 +21,7 @@ export class ArticleComponent implements OnInit {
   submited=false;
   listOfCategories:Categorie[];
   categorieSelected:Categorie;
-  categorieIdSelected:number;
+
 
   constructor(private articleservice: ArticleService,
               private categorieService:CategorieService,
@@ -49,36 +49,6 @@ export class ArticleComponent implements OnInit {
       });
   }
 
-  /*getById(id) {
-    return this.articleservice.getById(id).subscribe(
-      data => {
-        this.currentArticle = data;
-        this.articles.push(this.currentArticle);
-        console.log(data);
-        //this.router.navigateByUrl("/articles")
-      },
-      error => {
-        console.log("Erreur: " + error);
-      });
-  }*/
-
-  onCategorieSelected(id){
-    this.categorieService.getCategorieById(id)
-      .subscribe(
-        data => {
-          this.categorieSelected=data;
-          console.log("categorieSelected");
-          console.log(data);
-        },
-        error => {
-          console.log(error);
-        });
-  }
-
-  /*getCategorieByCode(){
-        this.categorieIdSelected=data.id;
-  }*/
-
   getAllCategories(){
     this.categorieService.getAllCategories().subscribe(
       data=>{
@@ -90,30 +60,6 @@ export class ArticleComponent implements OnInit {
       }
     );
   }
-
-  refreshList() {
-    this.getAllArticles();
-    this.currentArticle = null;
-    this.currentIndex = -1;
-  }
-
-  setActiveTutorial(tutorial, index) {
-    this.currentArticle = tutorial;
-    this.currentIndex = index;
-  }
-
-  removeAllTutorials() {
-    this.articleservice.deleteAll()
-      .subscribe(
-        response => {
-          console.log(response);
-          this.getAllArticles();
-        },
-        error => {
-          console.log(error);
-        });
-  }
-
   /**
    *
    */
@@ -144,51 +90,20 @@ export class ArticleComponent implements OnInit {
   }
 
   /**
-   * Methode pour afficher le formulaire de mise à jour
+   * This method redirect to edit-article.component with article id
    * @param id
-   * @param currentCategorie
    */
-  editArticle(curentArticle) {
-    // this.currentCategorie.id=id;
-    this.currentArticle=curentArticle;
-    console.log(this.currentArticle.id);
-    console.log(this.currentArticle.nom);
-    console.log(this.currentArticle.prixAchat);
-    console.log(this.currentArticle.prixVente);
-    console.log(this.currentArticle.quantite)
-    //this.router.navigate(['/categories/edit']);
-  }
-
-  /**
-   * Methode pour mettre a jour un formualaire
-   * @param id
-   * @param currentArticle
-   */
-  updateArticle(currentArticle) {
-    this.articleservice.update(currentArticle.id, currentArticle)
-      .subscribe(
-        data => {
-          console.log(data);
-          this.submited=true;
-          this.currentArticle=null;
-          this.article_details=null;
-        },
-        error => {
-          console.log(error);
-        });
+  editArticle(id) {
+    this.router.navigate(['articles/edit',id]);
   }
 
   detailsArticle(currentArticle:Article){
     this.article_details=currentArticle;
-    this.listCategorieOfArticle=this.article_details.listOfCategories;
+    //this.listCategorieOfArticle=this.article_details.listOfCategories;
     this.articles=[];
     this.articles.push(this.article_details);
     console.log(this.article_details);
   }
-
-  retourArriereOnDetails(){
-  }
-
 
   retourArriere(){
     this.currentArticle=null;
