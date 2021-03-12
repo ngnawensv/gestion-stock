@@ -1,12 +1,9 @@
 package cm.belrose.stockserveur.service;
 
-import cm.belrose.stockserveur.dto.CategorieDTO;
-import cm.belrose.stockserveur.model.Categorie;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import cm.belrose.stockserveur.dto.CategorieDto;
+import cm.belrose.stockserveur.model.Article;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Le 11/11/2020
@@ -15,26 +12,19 @@ import java.util.Optional;
  */
 public interface CategorieService {
 
-    Optional<Categorie> findById(Long id) throws Exception;
+    CategorieDto save(CategorieDto dto);
 
-    List<Categorie> findAll() throws Exception;
+    CategorieDto findById(Long id);
 
-   // Categorie save(CategorieDTO categorieDto) throws Exception;
-    Categorie save(Categorie categorie) throws Exception;
+    CategorieDto findCategorieByCode(String code);
 
-    Categorie update(Categorie categorie) throws Exception;
+    List<CategorieDto> findAll() ;
 
-   // void delete(Categorie categorie) throws Exception;
+    void delete(Long id);
 
-    void deleteById(Long id);
+    Article update(CategorieDto dto);
 
     void deleteAll();
 
-    Boolean existsByNom(String nom);
-
-    //Page<Categorie> cherhcer(String keyword, Pageable pageable);
-
-    Categorie findByCode(String code);
-
-    List<Categorie> findByNomContaining(String nom);
+    List<Article> findByNomContaining(String libelle);
 }

@@ -24,9 +24,7 @@ import java.math.BigDecimal;
 @Entity
 @Table(name = "articles")
 public class Article extends AbstractAudingEntity<String> implements Serializable {
-    @Column(name = "code_article")
     private String code;
-    @Column(name = "designation_article")
     private String designation;
     @Column(name = "prix_unitaire_hors_taxe")
     private BigDecimal prixUnitaireHt;
@@ -38,10 +36,13 @@ public class Article extends AbstractAudingEntity<String> implements Serializabl
     private BigDecimal prixAchat;
     @Column(name = "prix_vente")
     private BigDecimal prixVente;
-    @Column(name = "quantite")
     private double quantite;
+    private String photo;
     @ManyToOne
     @JoinColumn(name = "categorie_id")
     private Categorie categorie;
+    //Ce champs est juste mis pour simplifier les choses
+    @Column(name = "entreprise_id")
+    private Entreprise entrepriseId;
 
 }

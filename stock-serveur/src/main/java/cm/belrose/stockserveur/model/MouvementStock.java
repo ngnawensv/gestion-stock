@@ -1,12 +1,11 @@
 package cm.belrose.stockserveur.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.time.Instant;
 
 /**
  *
@@ -16,6 +15,7 @@ import java.io.Serializable;
  *
  */
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
@@ -25,4 +25,10 @@ public class MouvementStock extends AbstractAudingEntity<String> implements Seri
     @ManyToOne
     @JoinColumn(name = "article_id")
     private Article article;
+    private BigDecimal quantite;
+    @Column(name = "date_mouvement")
+    private Instant dateMouvement;
+    //Ce champs est juste mis pour simplifier les choses
+    @Column(name = "entreprise_id")
+    private Entreprise entrepriseId;
 }

@@ -1,9 +1,6 @@
 package cm.belrose.stockserveur.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
@@ -11,6 +8,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -22,6 +20,7 @@ import java.util.Set;
  *
  */
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
@@ -48,6 +47,18 @@ public class User extends AbstractAudingEntity<String> implements Serializable {
     @NotBlank
     @Size(max = 120)
     private String password;
+
+    private String nom;
+    private String prenom;
+    @Column(name = "date_naissance")
+    private Instant dateNaissance;
+    private String genre;
+    private String photo;
+    @Embedded
+    private Adresse adresse;
+    @ManyToOne
+    @JoinColumn(name = "entrprise_id")
+    private Entreprise entreprise;
 
     /**
      * FetchType.LAZY : indique que la relation doit être chargée à la demande ;

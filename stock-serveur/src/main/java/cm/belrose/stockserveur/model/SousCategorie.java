@@ -1,13 +1,11 @@
 package cm.belrose.stockserveur.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
@@ -24,4 +22,8 @@ public class SousCategorie extends AbstractAudingEntity<String> implements Seria
     @ManyToOne
     @JoinColumn(name = "categorie_id")
     private Categorie categorie;
+
+    //Ce champs est juste mis pour simplifier les choses
+    @Column(name = "entreprise_id")
+    private Entreprise entrepriseId;
 }

@@ -1,14 +1,12 @@
 package cm.belrose.stockserveur.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.io.Serializable;
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
@@ -16,4 +14,5 @@ import java.io.Serializable;
 @Table(name = "entreprises")
 public class Entreprise extends AbstractAudingEntity<String> implements Serializable {
     private String nom;
+    private String logo;
 }

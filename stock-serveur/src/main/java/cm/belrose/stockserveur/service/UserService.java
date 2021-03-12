@@ -1,5 +1,7 @@
 package cm.belrose.stockserveur.service;
 
+import cm.belrose.stockserveur.dto.ClientDto;
+import cm.belrose.stockserveur.dto.UserDto;
 import cm.belrose.stockserveur.model.User;
 import cm.belrose.stockserveur.payload.request.LoginRequest;
 import cm.belrose.stockserveur.payload.request.SignupRequest;
@@ -11,20 +13,28 @@ import java.util.Optional;
 
 public interface UserService {
 
-    void save(User user);
+    UserDto save(UserDto dto);
 
-    List<User> findAll();
+    UserDto findById(Long id);
 
-    Optional<User> findById(Long id);
+    List<UserDto> findAll() ;
 
-    Optional<User> findByUsername(String username);
+    void delete(Long id);
 
-    Boolean existsByUsername(String username);
+    //void save(User user);
 
-    Boolean existsByEmail(String email);
+   // Optional<User> findById(Long id);
 
-    public JwtResponse authenticateUser(LoginRequest loginRequest);
+   // List<User> findAll();
 
-    public MessageResponse registerUser(SignupRequest signUpRequest);
+   // Optional<User> findUserByUsername(String username);
+
+    //Boolean existsByUsername(String username);
+
+    //Boolean existsByEmail(String email);
+
+     //JwtResponse authenticateUser(LoginRequest loginRequest);
+
+   //  MessageResponse registerUser(SignupRequest signUpRequest);
 
 }

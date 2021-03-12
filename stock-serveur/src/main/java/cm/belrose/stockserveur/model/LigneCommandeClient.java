@@ -1,9 +1,6 @@
 package cm.belrose.stockserveur.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -15,6 +12,7 @@ import java.io.Serializable;
  *
  */
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
@@ -28,5 +26,8 @@ public class LigneCommandeClient extends AbstractAudingEntity<String> implements
     @ManyToOne
     @JoinColumn(name = "commandeclient_id")
     private CommandeClient commandeClient;
+    //Ce champs est juste mis pour simplifier les choses
+    @Column(name = "entreprise_id")
+    private Entreprise entrepriseId;
 
 }

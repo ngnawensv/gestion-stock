@@ -1,13 +1,12 @@
 package cm.belrose.stockserveur.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.Collection;
+import java.util.List;
 
 /**
  *
@@ -17,6 +16,7 @@ import java.util.Collection;
  *
  */
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
@@ -24,4 +24,11 @@ import java.util.Collection;
 @Table(name = "ventes")
 public class Vente extends AbstractAudingEntity<String> implements Serializable {
     private String code;
+    private Instant dateVente;
+    private String commentaire;
+    //Ce champs est juste mis pour simplifier les choses
+    @Column(name = "entreprise_id")
+    private Entreprise entrepriseId;
+    @OneToMany(mappedBy = "vente")
+    private List<LigneVente> ligneVenteList;
 }

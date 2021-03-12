@@ -1,26 +1,25 @@
 package cm.belrose.stockserveur.service;
 
-import cm.belrose.stockserveur.dto.ArticleDTO;
+import cm.belrose.stockserveur.dto.ArticleDto;
 import cm.belrose.stockserveur.model.Article;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface ArticleService {
 
-     Optional<Article> findById(Long id) throws Exception;
+     ArticleDto save(ArticleDto dto);
 
-     List<Article> findAll() throws Exception;
+    ArticleDto findById(Long id);
 
-     Article save(ArticleDTO articleDTO) throws Exception;
+    ArticleDto findArticleByCode(String code);
 
-     Article update(Article article) throws Exception;
+     List<ArticleDto> findAll() ;
 
-     void delete(Article article) throws Exception;
+     void delete(Long id);
 
-     void deleteById(Long id);
+    Article update(Article article);
 
      void deleteAll();
 
-     List<Article> findByNomContaining(String nom);
+     List<Article> findByNomContaining(String designation);
 }

@@ -2,6 +2,12 @@ package cm.belrose.stockserveur.service.impl;
 
 import cm.belrose.stockserveur.Security.jwt.JwtUtils;
 import cm.belrose.stockserveur.Security.services.UserDetailsImpl;
+import cm.belrose.stockserveur.dto.ClientDto;
+import cm.belrose.stockserveur.dto.UserDto;
+import cm.belrose.stockserveur.exceptions.EntityNotFoundException;
+import cm.belrose.stockserveur.exceptions.ErrorCodes;
+import cm.belrose.stockserveur.exceptions.InvalidEntityException;
+import cm.belrose.stockserveur.model.Client;
 import cm.belrose.stockserveur.model.RoleEnum;
 import cm.belrose.stockserveur.model.Role;
 import cm.belrose.stockserveur.model.User;
@@ -12,6 +18,9 @@ import cm.belrose.stockserveur.payload.response.MessageResponse;
 import cm.belrose.stockserveur.repository.RoleRepository;
 import cm.belrose.stockserveur.repository.UserRepository;
 import cm.belrose.stockserveur.service.UserService;
+import cm.belrose.stockserveur.validator.ClientValidator;
+import cm.belrose.stockserveur.validator.UserValidator;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -31,8 +40,49 @@ import java.util.stream.Collectors;
  * @author Ngnawen Samuel
  */
 @Service
+@Slf4j
 public class UserServiceImpl implements UserService {
+
     @Autowired
+    private UserRepository userRepository;
+
+    @Override
+    public UserDto save(UserDto dto) {
+        List<String> errors= UserValidator.validator(dto);
+        if(!errors.isEmpty()){
+            log.error(" Client non valide {}", dto);
+            throw new InvalidEntityException("Le client n'est pas valide", ErrorCodes.CLIENT_NOT_VALID, errors);
+        }
+        return UserDto.fromEntity(userRepository.save(UserDto.toEntity(dto)));
+    }
+
+    @Override
+    public UserDto findById(Long id) {
+        if(id==null){
+            log.error("Client ID is null");
+            return null;
+        }
+
+        return userRepository.findById(id)
+                .map(UserDto::fromEntity)
+                .orElseThrow(
+                ()->new EntityNotFoundException("Aucune caegoriet avec le CODE= "+id+" n'a été trouvé dans la BD",
+                        ErrorCodes.CLIENT_NOT_FOUND));
+    }
+
+    @Override
+    public List<UserDto> findAll() {
+        return null;
+    }
+
+    @Override
+    public void delete(Long id) {
+
+    }
+
+
+
+    /*@Autowired
     UserRepository userRepository;
     @Autowired
     AuthenticationManager authenticationManager;
@@ -44,40 +94,40 @@ public class UserServiceImpl implements UserService {
     PasswordEncoder encoder;
 
     @Autowired
-    JwtUtils jwtUtils;
+    JwtUtils jwtUtils;*/
 
-    private static String currentUser=null;
-    @Override
+  /*  private static String currentUser=null;*/
+    /*@Override
     public void save(User user) {
         userRepository.save(user);
-    }
+    }*/
 
-    @Override
+    /*@Override
     public List<User> findAll() {
         return userRepository.findAll();
     }
-
-    @Override
+*/
+    /*@Override
     public Optional<User> findById(Long id) {
         return userRepository.findById(id);
     }
-
-    @Override
+*/
+    /*@Override
     public Optional<User> findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
-
-    @Override
+*/
+    /*@Override
     public Boolean existsByUsername(String username) {
         return userRepository.existsByUsername(username);
     }
-
-    @Override
+*/
+    /*@Override
     public Boolean existsByEmail(String email) {
         return userRepository.existsByEmail(email);
     }
-
-    @Override
+*/
+    /*@Override
     public JwtResponse authenticateUser(LoginRequest loginRequest) {
 
         Authentication authentication = authenticationManager.authenticate(
@@ -95,8 +145,8 @@ public class UserServiceImpl implements UserService {
         currentUser=userDetails.getUsername();
         //System.out.println("userDetails.getUsername()+++> : " + userDetails.getUsername());
         return new JwtResponse(jwt, userDetails.getId(), userDetails.getUsername(), userDetails.getEmail(), roles);
-    }
-
+    }*/
+/*
     @Override
     public MessageResponse registerUser(SignupRequest signUpRequest) {
         // Create new user's account
@@ -131,12 +181,5 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
         return new MessageResponse("User registered successfully!");
     }
-
-    public static String getCurrentUser() {
-        return currentUser;
-    }
-
-    public static void setCurrentUser(String currentUser) {
-        UserServiceImpl.currentUser = currentUser;
-    }
+*/
 }

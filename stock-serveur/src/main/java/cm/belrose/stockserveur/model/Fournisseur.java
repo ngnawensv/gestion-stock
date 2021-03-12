@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class Fournisseur extends AbstractAudingEntity<String> implements Seriali
     private String prenom;
     private String genre;
     @Column(name = "date_naissance")
-    private LocalDate dateNaissance;
+    private Instant dateNaissance;
     @Column(name = "lieu_naissance")
     private String lieuNaissance;
     private String email;
@@ -32,4 +33,7 @@ public class Fournisseur extends AbstractAudingEntity<String> implements Seriali
     private Adresse adresse;
     @OneToMany(mappedBy = "fournisseur")
     private List<CommandeFournisseur> commandeFournisseurList;
+    //Ce champs est juste mis pour simplifier les choses
+    @Column(name = "entreprise_id")
+    private Entreprise entrepriseId;
 }

@@ -1,18 +1,13 @@
 package cm.belrose.stockserveur.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
@@ -20,12 +15,17 @@ import java.math.BigDecimal;
 @Table(name = "ligneVente")
 public class LigneVente extends AbstractAudingEntity<String> implements Serializable {
 
+    private BigDecimal quantite;
+    @Column(name = "prix_unitaire")
+    private BigDecimal prixUniataire;
+
     @ManyToOne
     @JoinColumn(name = "article_id")
     private Article article;
     @ManyToOne
     @JoinColumn(name = "vente_id")
     private Vente vente;
-
-    private BigDecimal quantite;
+    //Ce champs est juste mis pour simplifier les choses
+    @Column(name = "entreprise_id")
+    private Entreprise entrepriseId;
 }

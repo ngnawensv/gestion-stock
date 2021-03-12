@@ -10,6 +10,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 
 /**
@@ -25,7 +26,8 @@ import java.util.List;
 @Repository
 public interface CategorieRepository  extends RevisionRepository<Categorie, Long, Long>, JpaRepository<Categorie, Long> {
 
-    Boolean existsByLibelle(String libelle);
+    Optional<Categorie> findCategorieByCode(String code);
+   /* Boolean existsByLibelle(String libelle);
 
     void deleteById(Long id);
 
@@ -39,6 +41,6 @@ public interface CategorieRepository  extends RevisionRepository<Categorie, Long
     Categorie findByCode(String code);
 
 
-    /*@Query("select cat from Categorie cat where cat.nom like :x")
+    *//*@Query("select cat from Categorie cat where cat.nom like :x")
     Page<Categorie> chercher(@Param("x") String keyword, Pageable pageable);*/
 }

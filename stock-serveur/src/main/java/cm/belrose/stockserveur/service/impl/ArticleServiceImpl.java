@@ -1,19 +1,26 @@
 package cm.belrose.stockserveur.service.impl;
 
 import cm.belrose.stockserveur.config.constants.Constant;
-import cm.belrose.stockserveur.dto.ArticleDTO;
+import cm.belrose.stockserveur.dto.ArticleDto;
+import cm.belrose.stockserveur.exceptions.EntityNotFoundException;
+import cm.belrose.stockserveur.exceptions.ErrorCodes;
+import cm.belrose.stockserveur.exceptions.InvalidEntityException;
 import cm.belrose.stockserveur.model.Article;
 import cm.belrose.stockserveur.model.Categorie;
 import cm.belrose.stockserveur.repository.ArticleRepository;
 import cm.belrose.stockserveur.repository.CategorieRepository;
 import cm.belrose.stockserveur.service.ArticleService;
+import cm.belrose.stockserveur.validator.ArticleValidator;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Le 11/11/2020
@@ -22,60 +29,71 @@ import java.util.*;
  */
 @Service
 @Transactional
+@Slf4j
 public class ArticleServiceImpl implements ArticleService {
-
-    private static final Logger logger = LoggerFactory.getLogger(ArticleServiceImpl.class);
 
     @Autowired
     ArticleRepository articleRepository;
 
-    @Autowired
-    CategorieRepository categorieRepository;
 
     @Override
-    public Optional<Article> findById(Long id) throws Exception {
-        return articleRepository.findById(id);
-    }
-
-    @Override
-    public List<Article> findAll() throws Exception {
-        return articleRepository.findAll();
-    }
-
-    /**
-     * This method save a article with all their categories
-     * @param articleDTO
-     * @return
-     * @throws Exception
-     */
-    @Override
-    public Article save(ArticleDTO articleDTO) throws Exception {
-        Categorie categorie = articleDTO.getCategorie();
-
-        if (categorie==null) {
-            categorie = categorieRepository.findByLibelle(Constant.DEFAULT_CATEGORIE_NAME);
+    public ArticleDto save(ArticleDto dto) {
+        //Verification de la validité de l'article
+        List<String> errors= ArticleValidator.validator(dto);
+        if(!errors.isEmpty()){
+            log.error(" Article non valide {}", dto);
+            throw new InvalidEntityException("L'article n'est pas valide", ErrorCodes.ARTICLE_NOT_VALID, errors);
         }
-        Article article = new Article(articleDTO.getCode(), articleDTO.getDesignation(),
-                articleDTO.getPrixUnitaireHt(),articleDTO.getTauxTva(),articleDTO.getPrixUnitaireTtc(),articleDTO.getPrixAchat(),
-                articleDTO.getPrixVente(),articleDTO.getQuantite(),categorie);
-        logger.info("Article is successful save .....");
-        return articleRepository.save(article);
+        return ArticleDto.fromEntity(articleRepository.save(ArticleDto.toEntity(dto)));
     }
 
     @Override
-    public Article update(Article article) throws Exception {
-        return articleRepository.save(article);
+    public ArticleDto findById(Long id){
+        if(id==null){
+            log.error("Article ID is null");
+            return null;
+        }
+        return articleRepository.findById(id)
+                .map(ArticleDto::fromEntity)
+                .orElseThrow(
+                ()->new EntityNotFoundException("Aucun article avec l'ID="+id+"n'a été trouvé dans la BD",
+                        ErrorCodes.ARTICLE_NOT_FOUND));
     }
 
     @Override
-    public void delete(Article article) throws Exception {
-        articleRepository.delete(article);
+    public ArticleDto findArticleByCode(String code) {
+        if(!StringUtils.hasLength(code)){
+            log.error("Article CODE is null");
+            return null;
+        }
+        return articleRepository.findArticleByCode(code)
+                .map(ArticleDto::fromEntity)
+                .orElseThrow(
+                ()->new EntityNotFoundException("Aucun article avec le CODE= "+code+" n'a été trouvé dans la BD",
+                        ErrorCodes.ARTICLE_NOT_FOUND));
+    }
+
+    @Override
+    public List<ArticleDto> findAll(){
+        return articleRepository.findAll().stream()
+                .map(ArticleDto::fromEntity)
+                .collect(Collectors.toList());
     }
 
 
+
     @Override
-    public void deleteById(Long id) {
+    public void delete(Long id) {
+        if(id==null){
+            log.error("Article ID is null");
+            return ;
+        }
         articleRepository.deleteById(id);
+    }
+
+    @Override
+    public Article update(Article article) {
+        return articleRepository.save(article);
     }
 
     @Override

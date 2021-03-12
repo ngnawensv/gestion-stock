@@ -1,9 +1,6 @@
 package cm.belrose.stockserveur.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
@@ -16,6 +13,7 @@ import javax.persistence.*;
  *
  */
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
@@ -26,5 +24,8 @@ public class Role extends AbstractAudingEntity<String> {
     @Enumerated(EnumType.STRING)
     @Column(length = 20)
     private RoleEnum name;
+    //Ce champs est juste mis pour simplifier les choses
+    @Column(name = "entreprise_id")
+    private Entreprise entreprise;
 }
 

@@ -1,8 +1,5 @@
 package cm.belrose.stockserveur.model;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
@@ -16,6 +13,7 @@ import java.util.List;
  *
  */
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
@@ -27,4 +25,7 @@ public class Categorie extends AbstractAudingEntity<String> implements Serializa
     private String libelle;
     @OneToMany(mappedBy = "categorie")
     private List<Article> articleList;
+    //Ce champs est juste mis pour simplifier les choses
+    @Column(name = "entreprise_id")
+    private Entreprise entrepriseId;
 }
